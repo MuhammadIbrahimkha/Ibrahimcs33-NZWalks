@@ -77,21 +77,21 @@ namespace NZWalks.API.Data
                     RegionImageUrl = "https://www.doc.govt.nz/globalassets/images/conservation/parks-and-recreation/places-to-visit/waikato/waikato-forest.jpg"
                 },
 
-                new Region
-                {
-                    Id = Guid.Parse("89c9ecac-0d51-4b76-9ff2-87a4d19a73b8"),
-                    Name = "Bay of Plenty",
-                    Code = "NZ-BP",
-                    RegionImageUrl = "https://www.doc.govt.nz/globalassets/images/conservation/parks-and-recreation/places-to-visit/bay-of-plenty/bay-of-plenty-forest.jpg"
-                },
+                //new Region
+                //{
+                //    Id = Guid.Parse("89c9ecac-0d51-4b76-9ff2-87a4d19a73b8"),
+                //    Name = "Bay of Plenty",
+                //    Code = "NZ-BP",
+                //    RegionImageUrl = "https://www.doc.govt.nz/globalassets/images/conservation/parks-and-recreation/places-to-visit/bay-of-plenty/bay-of-plenty-forest.jpg"
+                //},
                  
-                new Region
-                {
-                    Id = Guid.Parse("86b07718-9582-4aac-bf70-c0fd1ba1a25b"),
-                    Name = "Gisborne",
-                    Code = "NZ-GS",
-                    RegionImageUrl = "https://www.doc.govt.nz/globalassets/images/conservation/parks-and-recreation/places-to-visit/gisborne/gisborne-forest.jpg"
-                },
+                //new Region
+                //{
+                //    Id = Guid.Parse("86b07718-9582-4aac-bf70-c0fd1ba1a25b"),
+                //    Name = "Gisborne",
+                //    Code = "NZ-GS",
+                //    RegionImageUrl = "https://www.doc.govt.nz/globalassets/images/conservation/parks-and-recreation/places-to-visit/gisborne/gisborne-forest.jpg"
+                //},
 
                 //new Region
                 //{
