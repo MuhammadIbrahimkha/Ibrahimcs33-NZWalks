@@ -7,6 +7,6 @@ namespace NZWalks.API.Controllers
     [ApiController]
     public class WalksController : ControllerBase
     {
-
+// This is a comment from the Repositroy to visual studio.
     }
 }
