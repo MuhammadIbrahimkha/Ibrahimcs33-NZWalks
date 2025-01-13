@@ -22,10 +22,11 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("NZWalksConnectio
 // Inject Repository
 
 builder.Services.AddScoped<IRegionRepository, SQLRegionRepository>();
+builder.Services.AddScoped<IWalkRepository, SQLWalkRepository>();
 //builder.Services.AddScoped<IRegionRepository, InMemoryRegionRepository>();
 
 // Inject Automapper
-
+ 
 builder.Services.AddAutoMapper(typeof(AutomapperProfile));
 
 
