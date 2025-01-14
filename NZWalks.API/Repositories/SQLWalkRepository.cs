@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 using NZWalks.API.Data;
 using NZWalks.API.Model.Domain;
 using NZWalks.API.Repositories.Interfaces;
@@ -21,6 +22,26 @@ namespace NZWalks.API.Repositories
             return walk;
         }
 
+        public async Task<Walk> DeleteByIdAsync(Guid id)
+        {
+           var find =  await _dbContext.Walks.FirstOrDefaultAsync(x => x.Id == id);
+
+            if(find == null)
+            {
+                return null;
+            }
+
+            _dbContext.Walks.Remove(find);
+
+        await _dbContext.SaveChangesAsync();
+
+            return find;
+            
+        
+        }
+
+       
+
         public async Task<List<Walk>> GetAllWalksAsync()
         {
            return await _dbContext.Walks.Include("Difficulty").Include("Region").ToListAsync();
@@ -36,6 +57,27 @@ namespace NZWalks.API.Repositories
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             
+        }
+
+        public async Task<Walk?> UpdateWalkByIdAsync(Guid id, Walk walk)
+        {
+           var existingWalk = await _dbContext.Walks.FirstOrDefaultAsync(x => x.Id == id);
+
+            if(existingWalk == null)
+            {
+                return null;
+            }
+
+
+            existingWalk.Name = walk.Name;
+            existingWalk.Description = walk.Description;
+            existingWalk.LengthInKm = walk.LengthInKm;
+            existingWalk.WalkImageUrl = walk.WalkImageUrl;
+            existingWalk.DifficultyId = walk.DifficultyId;
+            existingWalk.RegionId = walk.RegionId;
+
+            await _dbContext.SaveChangesAsync();
+            return existingWalk;
         }
     }
 }
