@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Abstractions;
-using Microsoft.EntityFrameworkCore;
 using NZWalks.API.CustomActionFilters;
 using NZWalks.API.Data;
 using NZWalks.API.Model.Domain;
@@ -15,7 +14,9 @@ namespace NZWalks.API.Controllers
     // https://localhost:portnumber/api/regions
 
     [Route("api/[controller]")]
-    [ApiController]    
+    [ApiController]
+    
+
     public class RegionsController : ControllerBase
     {
         private readonly NZWalksDbContext _context;
@@ -33,6 +34,7 @@ namespace NZWalks.API.Controllers
         // Get: https://localhhost:1234/api/regions
 
         [HttpGet]
+        [Authorize(Roles = "Reader")]
         public async  Task<IActionResult> GetAll()
         {
             // Get Data From Database - Domain models
@@ -77,6 +79,7 @@ namespace NZWalks.API.Controllers
 
         [HttpGet]
         [Route("{id}")]
+        [Authorize(Roles = "Reader")]
 
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
@@ -119,6 +122,7 @@ namespace NZWalks.API.Controllers
 
         [HttpPost]
         [ValidateModel]
+        [Authorize(Roles = "Writer")]
 
         public async Task<IActionResult> AddRegion([FromBody] AddRegionRequest_DTO addRegionRequest_DTO)
         {
@@ -182,6 +186,7 @@ namespace NZWalks.API.Controllers
         [HttpPut]
         [Route("{id:guid}")]
         [ValidateModel]
+        [Authorize("Writer")]
         public async Task<IActionResult> UpdateRegion([FromRoute] Guid id, [FromBody] UpdateRegion_DTO updateRegion_DTO)
         {
             // Just decorate this method with an Attribute called 'ValidateModel'. 
@@ -272,6 +277,7 @@ namespace NZWalks.API.Controllers
 
         [HttpDelete]
         [Route("{id:guid}")]
+        [Authorize(Roles ="Writer,Reader")]
 
         public async Task<IActionResult> DeleteRegion([FromRoute]Guid id)
         {
