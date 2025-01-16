@@ -16,6 +16,8 @@ namespace NZWalks.API.Data
 
         public DbSet<Walk> Walks { get; set; }
 
+        public DbSet<Image> Images { get; set; }
+
 
         // Seed data for Difficulties.
         //Easy, Medium, Hard
