@@ -8,6 +8,7 @@ using NZWalks.API.Model.DTO.AddRegionDTOs;
 using NZWalks.API.Model.DTO.DTOs;
 using NZWalks.API.Model.DTO.UpdateRegionDTOs;
 using NZWalks.API.Repositories.Interfaces;
+using System.Text.Json;
 
 namespace NZWalks.API.Controllers
 {
@@ -22,25 +23,37 @@ namespace NZWalks.API.Controllers
         private readonly NZWalksDbContext _context;
         private readonly IRegionRepository _regionRepository;
         private readonly IMapper _mapper;
+        private readonly ILogger<RegionsController> _logger1;
 
-        public RegionsController(NZWalksDbContext context, IRegionRepository regionRepository, IMapper mapper)
+        public RegionsController(NZWalksDbContext context, IRegionRepository regionRepository, IMapper mapper, ILogger<RegionsController> logger1)
         {
             _context = context;
            _regionRepository = regionRepository;
             _mapper = mapper;
+            _logger1 = logger1;
         }
 
         // Get All Regions
         // Get: https://localhhost:1234/api/regions
 
         [HttpGet]
-        [Authorize(Roles = "Reader")]
+        //[Authorize(Roles = "Reader")]
         public async  Task<IActionResult> GetAll()
         {
+
+            _logger1.LogInformation("GetAllRegions Action Method was invoked");
+
             // Get Data From Database - Domain models
 
             //var regions = await _context.Regions.ToListAsync();
             // Now we don't need this '_context' any more. We will use the repository instead.
+
+
+            _logger1.LogWarning("this is a warning log.");
+
+            _logger1.LogError("This is an error log.");
+
+
 
             var regions = await _regionRepository.GetAllAsync();
 
@@ -61,7 +74,7 @@ namespace NZWalks.API.Controllers
             // Use automapper instead of the above code.
             // Map Domain Model to DTO
 
-           //var regionDto = _mapper.Map<List<RegionDto>>(regions);
+            //var regionDto = _mapper.Map<List<RegionDto>>(regions);
             // we can even make the code more simple like this:
 
             // Return DTO to the client.
@@ -69,6 +82,9 @@ namespace NZWalks.API.Controllers
             //return Ok(regionDto);
 
             // Like this :
+
+            _logger1.LogInformation($"Finished GetAllRegions request with data: {JsonSerializer.Serialize(regions)}");
+
 
             return Ok(_mapper.Map<List<RegionDto>>(regions));
         }

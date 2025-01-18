@@ -9,12 +9,24 @@ using NZWalks.API.Repositories.Interfaces;
 using System.Text;
 using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.FileProviders;
+using Serilog;
 
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+// Logger
+
+var logger = new LoggerConfiguration()
+    .WriteTo.Console()  // write log to the console.
+   // .MinimumLevel.Information() // Change this to warning
+   .MinimumLevel.Warning()
+    .CreateLogger();
+
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
 
 builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor(); 
