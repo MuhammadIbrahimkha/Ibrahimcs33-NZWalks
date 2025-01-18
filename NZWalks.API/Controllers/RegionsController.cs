@@ -95,7 +95,7 @@ namespace NZWalks.API.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        [Authorize(Roles = "Reader")]
+        //[Authorize(Roles = "Reader")]
 
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
@@ -138,7 +138,7 @@ namespace NZWalks.API.Controllers
 
         [HttpPost]
         [ValidateModel]
-        [Authorize(Roles = "Writer")]
+        //[Authorize(Roles = "Writer")]
 
         public async Task<IActionResult> AddRegion([FromBody] AddRegionRequest_DTO addRegionRequest_DTO)
         {
@@ -202,7 +202,7 @@ namespace NZWalks.API.Controllers
         [HttpPut]
         [Route("{id:guid}")]
         [ValidateModel]
-        [Authorize("Writer")]
+        //[Authorize("Writer")]
         public async Task<IActionResult> UpdateRegion([FromRoute] Guid id, [FromBody] UpdateRegion_DTO updateRegion_DTO)
         {
             // Just decorate this method with an Attribute called 'ValidateModel'. 
@@ -293,7 +293,7 @@ namespace NZWalks.API.Controllers
 
         [HttpDelete]
         [Route("{id:guid}")]
-        [Authorize(Roles ="Writer,Reader")]
+        //[Authorize(Roles ="Writer,Reader")]
 
         public async Task<IActionResult> DeleteRegion([FromRoute]Guid id)
         {
